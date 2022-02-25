@@ -135,9 +135,9 @@ nnoremap <leader>o :wincmd o<CR>
 nnoremap <leader>f :CtrlP<CR>
 
 nnoremap <leader>gs :G<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gl :GcLog<CR>
-nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gc :Git commit<CR>
+nnoremap <leader>gl :Git log<CR>
+nnoremap <leader>gp :Git push<CR>
 
 set bg=dark
 colo tender
