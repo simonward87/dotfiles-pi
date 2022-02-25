@@ -1,0 +1,20 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+    shell:
+      stdout: true
+      stderr: true
+
+- clean: ['~']
+
+- link:
+    ~/.config/tmux: config/tmux
+    ~/.bashrc:
+      force: true
+    ~/.gitconfig:
+    ~/.tmux.conf:
+    ~/.vimrc:
+
+- shell:
+    - command: ./scripts/setup_env.zsh
