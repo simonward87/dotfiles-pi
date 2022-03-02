@@ -74,5 +74,6 @@ ssh -T git@github.com
 12. Switch from HTTPS to SSH
 
 ```sh
+# Make sure you are in the .dotfiles directory first
 git remote set-url origin git@github.com:simonward87/dotfiles.git
 ```
