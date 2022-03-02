@@ -49,7 +49,7 @@ sudo apt install -y git
 6. Clone this repo. Use `https` for now, switch to `ssh` later
 
 ```sh
-git clone https://github.com/simonward87/dotfiles.git ~/.dotfiles
+git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles
 ```
 
 7. `cd ~/.dotfiles`
