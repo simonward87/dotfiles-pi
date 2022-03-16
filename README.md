@@ -26,19 +26,19 @@ sudo su - USERNAME
 sudo raspi-config
 ```
 
-3. Remove the default user
-
-```sh
-sudo deluser -remove-home pi
-```
-
-4. End the remote session and copy local ssh id to the Pi. Consider adding an alias of the remote to local ssh config file for fast access.
+3. End the remote session and copy local ssh id to the Pi. Consider adding an alias of the remote to local ssh config file for fast access
 
 ```sh
 ssh-copy-id -i ~/.ssh/id_ed25519 USERNAME@HOSTADRESS
 ```
 
-5. Reconnect to the remote, update package info, upgrade outdated packages if required and install git
+4. Reconnect as the new user, remove the default user
+
+```sh
+sudo deluser -remove-home pi
+```
+
+5. Update package info, upgrade outdated packages if required and install git
 
 ```sh
 sudo apt update
@@ -46,7 +46,7 @@ sudo apt full-upgrade
 sudo apt install -y git
 ```
 
-6. Clone this repo. Use `https` for now, switch to `ssh` later
+6. Clone this repository. Use `https` for now, switch to `ssh` later
 
 ```sh
 git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles
@@ -71,9 +71,8 @@ eval "$(ssh-agent -s)"
 ssh -T git@github.com
 ```
 
-12. Switch from HTTPS to SSH
+12. Navigate back to `~/.dotfiles`, and switch from HTTPS to SSH
 
 ```sh
-# Make sure you are in the .dotfiles directory first
-git remote set-url origin git@github.com:simonward87/dotfiles.git
+git remote set-url origin git@github.com:simonward87/dotfiles-pi.git
 ```
