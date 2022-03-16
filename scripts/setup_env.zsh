@@ -5,4 +5,4 @@ echo -e "Enter superuser (sudo) password to install programmes"
 
 sudo apt update
 sudo apt full-upgrade
-sudo apt install -y tmux tree vim
+sudo apt install -y neofetch tmux tree vim
