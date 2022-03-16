@@ -89,6 +89,8 @@ Plug 'tpope/vim-vinegar'                          " netrw enhancements
 call plug#end()
 
 autocmd BufNewFile,BufReadPost '*.md' set filetype=markdown
+autocmd BufRead,BufNewFile Dockerfile.dev setf dockerfile
+autocmd BufRead,BufNewFile zprofile setf zsh
 autocmd FileType css setlocal sts=2 sw=2 ts=2
 autocmd FileType gitcommit setlocal wrap spell
 autocmd FileType go setlocal noet
@@ -127,6 +129,7 @@ let g:svelte_preprocessor_tags = [
 \ ]
 let g:svelte_preprocessors = ['ts']
 
+" window navigation
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
@@ -134,10 +137,34 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>o :wincmd o<CR>
 nnoremap <leader>f :CtrlP<CR>
 
+" git
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Git commit<CR>
 nnoremap <leader>gl :Git log<CR>
 nnoremap <leader>gp :Git push<CR>
+
+" buffer navigation
+nnoremap <Right> :bn<CR>
+nnoremap <Left> :bp<CR>
+"
+" shift text blocks vertically
+xnoremap J :move '>+1<CR>gv-gv
+xnoremap K :move '<-2<CR>gv-gv
+inoremap <C-j> <esc>:move .+1<CR>==a
+inoremap <C-k> <esc>:move .-2<CR>==a
+nnoremap <leader>j :move .+1<CR>==
+nnoremap <leader>k :move .-2<CR>==
+
+" undo breakpoints
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" autocenter when word searching
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
 
 set bg=dark
 colo tender
