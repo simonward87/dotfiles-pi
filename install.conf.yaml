@@ -9,6 +9,8 @@
 - clean: ['~']
 
 - link:
+    ~/.config/htop: config/htop
+    ~/.config/neofetch: config/neofetch
     ~/.config/tmux: config/tmux
     ~/.bashrc:
       force: true
