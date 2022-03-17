@@ -15,6 +15,7 @@
     ~/.gitconfig:
     ~/.tmux.conf:
     ~/.vimrc:
+    ~/.zshrc:
 
 - shell:
     - command: ./scripts/setup_env.zsh
