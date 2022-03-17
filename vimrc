@@ -71,6 +71,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins
 Plug 'alvan/vim-closetag'                         " auto-close html, jsx, tsx tags
+Plug 'cormacrelf/vim-colors-github'               " theme
 Plug 'ctrlpvim/ctrlp.vim'                         " fuzzy finder
 Plug 'djoshea/vim-autoread'                       " auto reload files when changed externally
 Plug 'evanleck/vim-svelte', {'branch': 'main'}    " syntax highlighting & indentation, Svelte
