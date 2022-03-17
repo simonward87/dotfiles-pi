@@ -1,7 +1,7 @@
 # Variables
 export DOTFILES="$HOME/.dotfiles"
-# export EDITOR="/opt/homebrew/bin/nvim"
-# export ZPLUG_HOME=$(brew --prefix)/opt/zplug
+export EDITOR="/usr/bin/vim"
+export ZPLUG_HOME="$HOME/.zplug"
 
 # Options (man zshoptions)
 setopt NO_CASE_GLOB
@@ -20,12 +20,11 @@ alias ga.='git add .'
 alias gc='git commit'
 alias gp='git push'
 alias grep='grep --color=auto'
-# alias ip='ipconfig getifaddr en0'
-alias la='gls -AFho --color --group-directories-first'
-alias ll='gls -Fho --color --group-directories-first'
-alias ls='gls -F --color --group-directories-first'
-# alias ts='tmux new -s "${PWD##*/}"'
-# alias trail='<<<${(F)path}'
+alias la='ls -AFho --color --group-directories-first'
+alias ll='ls -Fho --color --group-directories-first'
+alias ls='ls -F --color --group-directories-first'
+alias ts='tmux new -s "${PWD##*/}"'
+alias trail='<<<${(F)path}'
 
 # Customised prompt
 PROMPT='
@@ -40,26 +39,26 @@ function mkcd() {
 }
 
 # # Plugins
-# source $ZPLUG_HOME/init.zsh
+source $ZPLUG_HOME/init.zsh
 
-# zplug 'zsh-users/zsh-autosuggestions'
-# zplug 'zsh-users/zsh-completions'
-# zplug 'zsh-users/zsh-syntax-highlighting'
-# zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-syntax-highlighting'
+zplug 'zsh-users/zsh-history-substring-search'
 
-# if ! zplug check --verbose; then
-#   printf "Install? [y/N]: "
-#   if read -q; then
-#     echo; zplug install
-#   fi
-# fi
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
 
-# zplug load
+zplug load
 
-# # Other
-# fpath=(~/.zsh $fpath)
-# autoload -Uz compinit
-# compinit -u
+# Other
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
 
-# # Case insensitive path-completion 
-# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+# Case insensitive path-completion 
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
