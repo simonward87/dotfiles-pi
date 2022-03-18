@@ -15,13 +15,6 @@ alias df='df -h'
 alias dtfs='cd $DOTFILES; vim .'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias ga='git add'
-alias gaa='git add .'
-alias gc='git commit -v'
-alias gca='git commit -av'
-alias gd='git diff'
-alias gs='git status'
-alias gp='git push'
 alias grep='grep --color=auto'
 alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
@@ -45,6 +38,7 @@ function mkcd() {
 source $ZPLUG_HOME/init.zsh
 
 zplug 'le0me55i/zsh-extract'
+zplug 'plugins/git', from:oh-my-zsh
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-syntax-highlighting'
