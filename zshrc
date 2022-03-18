@@ -62,3 +62,7 @@ compinit -u
 
 # Case insensitive path-completion 
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+
+# Add ssh key to agent to remove need for authentication on every use
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_ed25519

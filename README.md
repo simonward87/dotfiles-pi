@@ -67,13 +67,13 @@ eval $(ssh-agent)
 ssh-add ~/.ssh/id_ed25519
 ```
 
-10. Create a config file in `~/.ssh`, and set the permissions to `600` 
+10. Create a config file in `~/.ssh` with `600` permissions
 
 ```sh
 touch ~/.ssh/config && chmod 600 ~/.ssh/config
 ```
 
-11. Add the new key so it is referenced by Github by default
+11. Add the new key so it is used for Github
 
 ```
 Host github.com
