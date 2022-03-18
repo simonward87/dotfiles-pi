@@ -29,10 +29,10 @@ sudo raspi-config
 3. End the remote session and copy local ssh id to the Pi. Consider adding an alias of the remote to local ssh config file for fast access
 
 ```sh
-ssh-copy-id -i ~/.ssh/id_ed25519 USERNAME@HOSTADRESS
+ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST
 ```
 
-4. Reconnect as the new user, remove the default user
+4. Reconnect as the new user and remove the default user
 
 ```sh
 sudo deluser -remove-home pi
@@ -49,21 +49,25 @@ sudo apt install -y git
 6. Clone this repository. Use `https` for now, switch to `ssh` later
 
 ```sh
-git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles
+git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
 ```
 
-7. `cd ~/.dotfiles`
-8. [`./install`](install)
-9. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to GitHub, and switch remotes.
+7. [`./install`](install)
+8. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to GitHub, and switch remotes.
 
 ```sh
 ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
-
-# If required, start the ssh-agent
-eval "$(ssh-agent -s)"
 ```
 
-10. Copy public key and add to github.com > Settings > SSH and GPG keys (`~/.ssh/id_ed25519.pub`)
+9. Start `ssh-agent`, and then add the new key to the agent (removing the requirement to authenticate with every use)
+
+```sh
+eval $(ssh-agent)
+
+ssh-add ~/.ssh/id_ed25519
+```
+
+10. Make a copy of the public key and add to Github (Settings > SSH and GPG keys (`~/.ssh/id_ed25519.pub`))
 11. Test SSH connection, then verify fingerprint and username
 
 ```sh
@@ -71,7 +75,7 @@ eval "$(ssh-agent -s)"
 ssh -T git@github.com
 ```
 
-12. Navigate back to `~/.dotfiles`, and switch from HTTPS to SSH
+12. Finally, navigate to `~/.dotfiles`, and set the remote to use SSH
 
 ```sh
 git remote set-url origin git@github.com:simonward87/dotfiles-pi.git

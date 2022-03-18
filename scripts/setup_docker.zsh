@@ -4,7 +4,7 @@ echo -e "\n<<< Starting Docker Setup >>>\n"
 echo -e "Enter superuser (sudo) password to continue with installation"
 
 if command -v docker &> /dev/null; then
-    echo "docker-compose exists, skipping install"
+    echo "docker exists, skipping install"
 else
     # install docker
     curl -sSL https://get.docker.com | sh
