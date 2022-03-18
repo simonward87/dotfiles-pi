@@ -31,5 +31,5 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 # set zsh as the default shell
 if [ "$SHELL" != "/bin/zsh" ]; then
     echo "changing default shell to zsh"
-    chsh -s /bin/zsh
+    sudo chsh -s /bin/zsh
 fi
