@@ -59,7 +59,7 @@ git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.do
 ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
 ```
 
-9. Start `ssh-agent`, and then add the new key to the agent (removing the requirement to authenticate with every use)
+9. Start `ssh-agent`, and then add the new key to the agent
 
 ```sh
 eval $(ssh-agent)
@@ -67,15 +67,29 @@ eval $(ssh-agent)
 ssh-add ~/.ssh/id_ed25519
 ```
 
-10. Make a copy of the public key and add to Github (Settings > SSH and GPG keys (`~/.ssh/id_ed25519.pub`))
-11. Test SSH connection, then verify fingerprint and username
+10. Create a config file in `~/.ssh`, and set the permissions to `600` 
+
+```sh
+touch ~/.ssh/config && chmod 600 ~/.ssh/config
+```
+
+11. Add the new key so it is referenced by Github by default
+
+```
+Host github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+12. Make a copy of the public key and add to Github (Settings > SSH and GPG keys (`~/.ssh/id_ed25519.pub`))
+13. Test SSH connection, then verify fingerprint and username
 
 ```sh
 # https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
 ssh -T git@github.com
 ```
 
-12. Finally, navigate to `~/.dotfiles`, and set the remote to use SSH
+14. Finally, navigate to `~/.dotfiles`, and set the remote to use SSH
 
 ```sh
 git remote set-url origin git@github.com:simonward87/dotfiles-pi.git
