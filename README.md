@@ -38,11 +38,10 @@ ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST
 sudo deluser -remove-home pi
 ```
 
-5. Update package info, upgrade outdated packages if required and install git
+5. Update package info and install git
 
 ```sh
 sudo apt update
-sudo apt full-upgrade
 sudo apt install -y git
 ```
 
@@ -81,7 +80,7 @@ Host github.com
   IdentityFile ~/.ssh/id_ed25519
 ```
 
-12. Make a copy of the public key and add to Github (Settings > SSH and GPG keys (`~/.ssh/id_ed25519.pub`))
+12. Make a copy of the public key (`~/.ssh/id_ed25519.pub`) and add to Github > Settings > SSH and GPG keys
 13. Test SSH connection, then verify fingerprint and username
 
 ```sh

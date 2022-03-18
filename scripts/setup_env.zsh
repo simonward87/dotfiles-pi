@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo -e "\n<<< Starting Environment Setup >>>\n"
-echo -e "Enter superuser (sudo) password to install programmes"
 
 # update local repository
 sudo apt update
@@ -9,7 +8,7 @@ sudo apt update
 # update all packages to latest versions
 sudo apt full-upgrade
 
-# programs to install
+# programs to install with apt
 programs=( neofetch tmux tree vim zsh )
 
 for i in "${programs[@]}"
@@ -26,10 +25,14 @@ do
 done
 
 # install zplug
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+if [ -d ~/.zplug ]; then
+    echo "zplug exists, skipping install"
+else
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
 
 # set zsh as the default shell
 if [ "$SHELL" != "/bin/zsh" ]; then
     echo "changing default shell to zsh"
-    sudo chsh -s /bin/zsh
+    chsh -s /bin/zsh $USER
 fi
