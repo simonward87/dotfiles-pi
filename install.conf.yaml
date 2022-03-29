@@ -21,4 +21,4 @@
 
 - shell:
     - command: ./scripts/setup_env.zsh
-    - command: ./scripts/setup_docker.zsh
+    # - command: ./scripts/setup_docker.zsh
