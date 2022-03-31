@@ -1,15 +1,19 @@
 # Raspberry Pi Dotfiles
 
-I learned a ton about [dotfiles, command line use, Homebrew, zsh, git, macOS and more with the course **_Dotfiles from Start to Finish-ish_**](http://dotfiles.eieio.xyz/) by [@EIEIOxyz](https://twitter.com/EIEIOxyz/), and you can too!
+I learned a ton about
+[dotfiles, command line use, Homebrew, zsh, git, macOS and more with the course **_Dotfiles from Start to Finish-ish_**](http://dotfiles.eieio.xyz/)
+by [@EIEIOxyz](https://twitter.com/EIEIOxyz/), and you can too!
 
 ## Restore Instructions
 
-There are some assumptions about the Pi being configured: 
+There are some assumptions about the Pi being configured:
 
 - It is being setup in headless mode
 - It has already had an image installed
-- SSH has been initialised (placing an empty file named `ssh` in the root directory)
-- WiFi has been setup (configuring `wpa_supplicant.conf` and placing in the root directory)
+- SSH has been initialised (placing an empty file named `ssh` in the root
+  directory)
+- WiFi has been setup (configuring `wpa_supplicant.conf` and placing in the root
+  directory)
 - You have successfully connected via SSH and are logged in as the default user
 
 1. Setup a new user and password, and assign permissions
@@ -19,14 +23,17 @@ sudo adduser USERNAME
 sudo usermod -a -G adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi USERNAME
 ```
 
-2. Change to the new user, and then update the **boot / auto-login** settings to use this new user
+2. Change to the new user, and then update the **boot / auto-login** settings to
+   use this new user
 
 ```sh
 sudo su - USERNAME
 sudo raspi-config
 ```
 
-3. End the remote session and copy local ssh id to the Pi. Consider adding an alias of the remote to local ssh config file for fast access
+3. The previous step ends the remote session on reboot. Copy local ssh id to the
+   Pi. Consider adding an alias of the remote to local ssh config file for fast
+   access
 
 ```sh
 ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST
@@ -55,7 +62,8 @@ git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.do
 
 ### SSH Setup
 
-1. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to GitHub, and switch remotes.
+1. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh),
+   add to GitHub, and switch remotes.
 
 ```sh
 ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
@@ -83,7 +91,8 @@ Host github.com
   IdentityFile ~/.ssh/id_ed25519
 ```
 
-5. Make a copy of the public key (`~/.ssh/id_ed25519.pub`) and add to Github > Settings > SSH and GPG keys
+5. Make a copy of the public key (`~/.ssh/id_ed25519.pub`) and add to Github >
+   Settings > SSH and GPG keys
 6. Test SSH connection, then verify fingerprint and username
 
 ```sh
@@ -99,8 +108,31 @@ git remote set-url origin git@github.com:simonward87/dotfiles-pi.git
 
 ### Docker Setup
 
-1. Uncomment the line below in `./install.conf` before running the install script (or just run the script directly)
+1. Uncomment the line below in `./install.conf` before running the install
+   script (or just run the script directly)
 
 ```
 # - command: ./scripts/setup_docker.zsh
+```
+
+### Desktop Setup (GNOME)
+
+1. Uncomment the line below in `./install.conf` before running the install
+   script (or just run the script directly)
+
+```
+# - command: ./scripts/setup_gnome.zsh
+```
+
+2. Run the desktop and login to get started
+
+```sh
+startx
+```
+
+3. Optionally, set the desktop environment to load on boot — run `raspi-config`,
+   and then update the **boot / auto-login** settings to boot to desktop
+
+```sh
+sudo raspi-config
 ```

@@ -26,10 +26,10 @@ if grep -i "debian" /etc/issue &> /dev/null; then
 
     # set zsh as the default shell
     if [ "$SHELL" != "/bin/zsh" ]; then
-        echo "\nChanging default shell to zsh\n"
+        echo -e "\nChanging default shell to zsh\n"
         sudo chsh -s /bin/zsh $USER
     else
-        echo "\nzsh already set as default shell\n"
+        echo -e "\nzsh already set as default shell\n"
     fi
 elif grep -i "arch" /etc/issue &> /dev/null; then
     # Update system packages
@@ -49,13 +49,13 @@ elif grep -i "arch" /etc/issue &> /dev/null; then
     # change default shell to Zsh
     if [ "$SHELL" != "/usr/bin/zsh" ]
     then
-        echo "\nChanging default shell to zsh\n"
+        echo -e "\nChanging default shell to zsh\n"
         chsh -s /usr/bin/zsh $USER
     else
-        echo "\nzsh already set as default shell\n"
+        echo -e "\nzsh already set as default shell\n"
     fi
 else
-    echo "\nDistribution cannot be determined — no packages installed\n"
+    echo -e "\nDistribution cannot be determined — no packages installed\n"
     exit 1
 fi
 
