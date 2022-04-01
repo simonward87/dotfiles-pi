@@ -10,7 +10,8 @@ esac
 
 # Dotfiles directory
 export DOTFILES="$HOME/.dotfiles"
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
+export VISUAL="$EDITOR"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -122,5 +123,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-. "$HOME/.cargo/env"

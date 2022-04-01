@@ -9,11 +9,11 @@
 - clean: ['~']
 
 - link:
+    ~/.bashrc:
+      force: true
     ~/.config/htop: config/htop
     ~/.config/neofetch: config/neofetch
     ~/.config/tmux: config/tmux
-    ~/.bashrc:
-      force: true
     ~/.gitconfig:
     ~/.tmux.conf:
     ~/.vimrc:

@@ -2,9 +2,6 @@
 
 echo -e "\n<<< Starting Environment Setup >>>\n"
 
-# programs to install with pacman
-programs=( htop ncdu neofetch tmux tree vim zsh )
-
 if grep -i "debian" /etc/issue &> /dev/null; then
     # update local repository
     sudo apt update
