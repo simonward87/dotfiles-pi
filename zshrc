@@ -1,6 +1,7 @@
 # Variables
 export DOTFILES="$HOME/.dotfiles"
 export EDITOR="/usr/bin/vim"
+export VISUAL="$EDITOR"
 export ZPLUG_HOME="$HOME/.zplug"
 
 # Options (man zshoptions)
@@ -8,6 +9,7 @@ setopt NO_CASE_GLOB
 setopt AUTO_CD
 setopt CORRECT
 setopt CORRECT_ALL
+setopt EXTENDED_HISTORY
 unsetopt BEEP
 
 # Aliases
@@ -23,8 +25,19 @@ alias ts='tmux new -s "${PWD##*/}"'
 alias trail='<<<${(F)path}'
 
 # Customised prompt
+# PROMPT='
+# %(?.%F{green}%m%f.%F{red}[%?] %m%f) %1~ %# '
 PROMPT='
-%(?.%F{green}%m%f.%F{red}[%?] %m%f) %1~ %# '
+%(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %1~ %# '
+# Git integration
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_
+zstyle ':vcs_info:git:*' formats '%F{245}(%b) %r%f'
+zstyle ':vcs_info:*' enable git
+
 
 # Remove $PATH duplicates
 typeset -U path
@@ -32,6 +45,10 @@ typeset -U path
 # Functions
 function mkcd() {
   mkdir -p "$@" && cd "$_";
+}
+
+function hgrep() {
+  fc -Dlim "*$@*" 1
 }
 
 # # Plugins
