@@ -136,3 +136,17 @@ startx
 ```sh
 sudo raspi-config
 ```
+
+### WiFi SSH Dropouts
+
+When connecting over SSH, the connection always drops after a period of time, necessitating a reboot. This can be fixed by turning off `power_save` in `/etc/rc.local`. Add the line below, before `exit 0` is called:
+
+```
+/sbin/iwconfig wlan0 power off
+```
+
+It can also be manually disabled using `sudo iw wlan0 set power_save off`, although this will not persist.
+
+| Note: |
+| :--- |
+| `/usr/sbin` currently has to be manually added to `PATH` for `iw` to function, as it is not included by default |
