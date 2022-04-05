@@ -1,6 +1,10 @@
 # Variables
 export DOTFILES="$HOME/.dotfiles"
 export EDITOR="/usr/bin/vim"
+export HISTCONTROL=ignoreboth
+export HISTFILESIZE=40960
+export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
+export HISTSIZE=10000
 export VISUAL="$EDITOR"
 export ZPLUG_HOME="$HOME/.zplug"
 
@@ -21,6 +25,7 @@ alias grep='grep --color=auto'
 alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
 alias ls='ls -F --color --group-directories-first'
+alias lx='ls -oXBFh --color --group-directories-first'
 alias ts='tmux new -s "${PWD##*/}"'
 alias trail='<<<${(F)path}'
 
@@ -29,7 +34,16 @@ alias trail='<<<${(F)path}'
 # %(?.%F{green}%m%f.%F{red}[%?] %m%f) %1~ %# '
 PROMPT='
 %(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %1~ %# '
-# Git integration
+
+# Customised prompt
+if [ $HOST = "MacBook-Air.localdomain" ]; then
+    PROMPT="${BR}%(?..%F{red}[%?] %f)%2~ %# "
+else
+    # Shows hostname in prompt when using remote machines
+    PROMPT="${BR}%(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %2~ %# "
+fi
+
+# Git prompt integration
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
