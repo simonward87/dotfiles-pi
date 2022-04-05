@@ -107,6 +107,7 @@ autocmd FileType scss setlocal sts=2 sw=2 ts=2
 autocmd FileType svelte setlocal sts=2 sw=2 ts=2
 autocmd FileType typescript setlocal sts=2 sw=2 ts=2
 autocmd FileType typescriptreact setlocal sts=2 sw=2 ts=2
+autocmd FileType vim setlocal sts=2 sw=2 ts=2
 autocmd FileType vue setlocal sts=2 sw=2 ts=2
 autocmd FileType yaml setlocal sts=2 sw=2 ts=2
 
