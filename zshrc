@@ -5,6 +5,7 @@ export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
+export PATH=$PATH:/usr/sbin
 export VISUAL="$EDITOR"
 export ZPLUG_HOME="$HOME/.zplug"
 
@@ -28,12 +29,6 @@ alias ls='ls -F --color --group-directories-first'
 alias lx='ls -oXBFh --color --group-directories-first'
 alias ts='tmux new -s "${PWD##*/}"'
 alias trail='<<<${(F)path}'
-
-# Customised prompt
-# PROMPT='
-# %(?.%F{green}%m%f.%F{red}[%?] %m%f) %1~ %# '
-PROMPT='
-%(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %1~ %# '
 
 # Customised prompt
 if [ $HOST = "MacBook-Air.localdomain" ]; then
