@@ -173,3 +173,7 @@ colo tender
 
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
+
+" highlight end-of-line whitespace
+hi WhitespaceEOL guibg=white ctermbg=white
+match WhitespaceEOL /\s\+$/
