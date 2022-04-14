@@ -1,4 +1,5 @@
 # Variables
+export BR=$'\n'
 export DOTFILES="$HOME/.dotfiles"
 export EDITOR="/usr/bin/vim"
 export HISTCONTROL=ignoreboth
