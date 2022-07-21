@@ -1,12 +1,13 @@
 # Variables
 export BR=$'\n'
 export DOTFILES="$HOME/.dotfiles"
-export EDITOR="/usr/bin/vim"
+export EDITOR="$(which vim)"
+export GOPATH=$HOME/go
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
-export PATH=$PATH:/usr/sbin
+export PATH=$PATH:/usr/sbin:$GOPATH/bin:/usr/local/go/bin
 export VISUAL="$EDITOR"
 export ZPLUG_HOME="$HOME/.zplug"
 
