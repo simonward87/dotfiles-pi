@@ -1,5 +1,6 @@
 # Variables
 export BR=$'\n'
+export CARGO_HOME="$HOME/.cargo"
 export DOTFILES="$HOME/.dotfiles"
 export EDITOR="$(which vim)"
 export GOPATH=$HOME/go
@@ -64,6 +65,7 @@ function hgrep() {
 
 # # Plugins
 source $ZPLUG_HOME/init.zsh
+source $CARGO_HOME/env
 
 zplug 'le0me55i/zsh-extract'
 zplug 'plugins/git', from:oh-my-zsh
