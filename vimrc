@@ -1,10 +1,6 @@
 filetype plugin indent on
 syntax enable
 
-if filereadable($HOME."/.vim/plugged/vim-sensible/plugin/sensible.vim")
-    runtime! plugin/sensible.vim                  " run immediately, allowing overrides to function below
-endif
-
 set backspace=indent,eol,start                    " restore default backspace behaviour
 set completeopt=menuone,longest,noinsert,noselect " text completion
 set cursorline                                    " current line highlight
@@ -21,9 +17,10 @@ set noerrorbells                                  " mute error sound
 set noswapfile                                    " new buffers created without swapfiles
 set nowrap                                        " disable line wrapping
 set nowritebackup                                 " coc recommendation
+set nrformats-=octal                              " disallow octals for math operations
 set number                                        " enable line numbers
 set relativenumber                                " enable relative line numbers
-set ruler                                         " show cursor location
+set noruler                                       " hide cursor location
 set scrolloff=4                                   " scroll limit from screenY boundaries
 set shiftwidth=4                                  " updates shift-width value
 set shortmess+=c                                  " avoid file message prompts
@@ -83,7 +80,6 @@ Plug 'pangloss/vim-javascript'                    " syntax highlighting & indent
 Plug 'tpope/vim-capslock'                         " software capslock
 Plug 'tpope/vim-commentary'                       " comment stuff out
 Plug 'tpope/vim-fugitive'                         " git wrapper
-Plug 'tpope/vim-sensible'                         " useful defaults
 Plug 'tpope/vim-surround'                         " easily change surrounds
 Plug 'tpope/vim-vinegar'                          " netrw enhancements
 
