@@ -126,3 +126,13 @@ It can also be manually disabled using `sudo iw wlan0 set power_save off`, altho
 | Note: |
 | :--- |
 | `/usr/sbin` currently has to be manually added to `PATH` for `iw` to function, as it is not included by default |
+
+### Root User Config
+
+If desired, symlink local config (e.g. `.vimrc`) to the root user directory:
+
+```
+sudo ln -s ~/.dotfiles/vimrc /root/.vimrc
+sudo ln -s ~/.dotfiles/zshrc /root/.zshrc
+sudo rm /root/.bashrc && sudo ln -s ~/.dotfiles/bashrc /root/.bashrc
+```
