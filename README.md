@@ -14,51 +14,27 @@ There are some assumptions about the Pi being configured:
   directory)
 - WiFi has been setup (configuring `wpa_supplicant.conf` and placing in the root
   directory)
-- You have successfully connected via SSH and are logged in as the default user
+- You have successfully connected via SSH and are logged in
 
-1. Setup a new user and password, and assign permissions
-
-```sh
-sudo adduser USERNAME
-sudo usermod -a -G adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi USERNAME
-```
-
-2. Change to the new user, and then update the **boot / auto-login** settings to
-   use this new user
-
-```sh
-sudo su - USERNAME
-sudo raspi-config
-```
-
-3. The previous step ends the remote session on reboot. Copy local ssh id to the
-   Pi. Consider adding an alias of the remote to local ssh config file for fast
-   access
+1. Copy local ssh id to the Pi. Consider adding an alias of the remote to `~/.ssh/config` for fast access
 
 ```sh
 ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST
 ```
 
-4. Reconnect as the new user and remove the default user
+2. Update package info and install Git
 
 ```sh
-sudo deluser -remove-home pi
+sudo apt update && sudo apt install -y git
 ```
 
-5. Update package info and install git
-
-```sh
-sudo apt update
-sudo apt install -y git
-```
-
-6. Clone this repository. Use `https` for now, switch to `ssh` later
+3. Clone this repository. Use `https` for now, switch to `ssh` later
 
 ```sh
 git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
 ```
 
-7. [`./install`](install)
+4. Confirm configuration details in `install.conf.yaml` and then run [`./install`](install)
 
 ### SSH Setup
 

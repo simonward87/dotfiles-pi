@@ -168,8 +168,8 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-set bg=dark
-colo tender
+set bg=light
+colo github
 
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
