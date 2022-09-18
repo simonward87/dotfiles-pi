@@ -6,6 +6,7 @@ set completeopt=menuone,longest,noinsert,noselect " text completion
 set cursorline                                    " current line highlight
 set encoding=utf-8                                " set internal encoding
 set expandtab                                     " convert tabs to spaces
+set hlsearch                                      " highlight all search results
 set hidden                                        " keep multiple buffers open
 set ignorecase                                    " case-insensitive search
 set incsearch                                     " updates search results per-character
@@ -163,6 +164,9 @@ inoremap ? ?<c-g>u
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
+
+" clear highlight search
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 set bg=light
 colo github
