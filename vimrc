@@ -171,9 +171,10 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 set bg=light
 colo github
 
-" transparent background
+" custom transparency
 hi Normal guibg=NONE ctermbg=NONE
-
-" highlight end-of-line whitespace
-hi WhitespaceEOL guibg=white ctermbg=white
+hi EndOfBuffer guifg=bg guibg=bg
+hi LineNr guibg=bg
+" highlight EOL whitespace
+hi WhitespaceEOL guibg=#EAEAEA ctermbg=white
 match WhitespaceEOL /\s\+$/
