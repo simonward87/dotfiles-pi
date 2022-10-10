@@ -136,3 +136,22 @@ sudo ln -s ~/.dotfiles/vimrc /root/.vimrc
 sudo ln -s ~/.dotfiles/zshrc /root/.zshrc
 sudo rm /root/.bashrc && sudo ln -s ~/.dotfiles/bashrc /root/.bashrc
 ```
+
+### Setup PostgreSQL
+
+```sh
+sudo apt update && sudo apt full-upgrade -y
+sudo apt install postgresql
+sudo su postgres " Change to the postgres user 
+
+createuser <username> -P --interactive " create a new role
+
+psql
+CREATE DATABASE <username>; " create new db matching username
+
+exit " quit out from the CLI, and then from the default user
+
+psql
+CREATE DATABASE example;
+\connect example; " connect to new db
+```
