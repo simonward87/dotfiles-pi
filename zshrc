@@ -28,9 +28,7 @@ alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
-alias ls='ls -F --color --group-directories-first'
-alias lx='ls -oXBFh --color --group-directories-first'
-alias ts='tmux new -s "${PWD##*/}"'
+alias ls='ls -1F --color --group-directories-first'
 alias trail='<<<${(F)path}'
 
 # Customised prompt
