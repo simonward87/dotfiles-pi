@@ -168,13 +168,21 @@ nnoremap J mzJ`z
 " clear highlight search
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-set bg=light
-colo github
+let  theme = "tender"
+execute "colorscheme ".theme
 
-" custom transparency
-hi Normal guibg=NONE ctermbg=NONE
+" custom highlights
+if theme == "tender"
+  hi Normal guibg=#1d1d1d ctermbg=NONE
+  hi WhitespaceEOL guibg=#666666 ctermbg=gray
+elseif theme == "github"
+  set background=light
+  hi Normal guibg=#ffffff ctermbg=white
+  hi WhitespaceEOL guibg=#d73a49 ctermbg=white
+endif
+
 hi EndOfBuffer guifg=bg guibg=bg
 hi LineNr guibg=bg
-" highlight EOL whitespace
-hi WhitespaceEOL guibg=#EAEAEA ctermbg=white
+
+" custom syntax match
 match WhitespaceEOL /\s\+$/
