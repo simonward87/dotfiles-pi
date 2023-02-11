@@ -1,6 +1,5 @@
 # Variables
 export BR=$'\n'
-export CARGO_HOME="$HOME/.cargo"
 export DOTFILES="$HOME/.dotfiles"
 export EDITOR="$(which vim)"
 export GOPATH=$HOME/go
@@ -11,6 +10,11 @@ export HISTSIZE=10000
 export PATH=$PATH:/usr/sbin:$GOPATH/bin:/usr/local/go/bin
 export VISUAL="$EDITOR"
 export ZPLUG_HOME="$HOME/.zplug"
+
+if command -v cargo &> /dev/null; then
+    export CARGO_HOME="$HOME/.cargo"
+    source $CARGO_HOME/env
+fi
 
 # Options (man zshoptions)
 setopt NO_CASE_GLOB
@@ -30,6 +34,7 @@ alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
 alias ls='ls -1F --color --group-directories-first'
 alias trail='<<<${(F)path}'
+alias vi=vim
 
 # Customised prompt
 if [ $HOST = "MacBook-Air.localdomain" ]; then
@@ -63,7 +68,6 @@ function hgrep() {
 
 # # Plugins
 source $ZPLUG_HOME/init.zsh
-source $CARGO_HOME/env
 
 zplug 'le0me55i/zsh-extract'
 zplug 'plugins/git', from:oh-my-zsh
