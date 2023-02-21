@@ -1,23 +1,39 @@
 # Variables
-export BR=$'\n'
-export CARGO_HOME="$HOME/.cargo"
 export DOTFILES="$HOME/.dotfiles"
-export EDITOR="$(which vim)"
-export GOPATH=$HOME/go
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
-export PATH=$PATH:/usr/sbin:$GOPATH/bin:/usr/local/go/bin
+export PATH=$PATH:/usr/sbin:/usr/local/go/bin
 export VISUAL="$EDITOR"
-export ZPLUG_HOME="$HOME/.zplug"
+
+if command -v cargo &> /dev/null; then
+    export CARGO_HOME="$HOME/.cargo"
+    export PATH=$PATH:$CARGO_HOME/bin
+fi
+
+if command -v go &> /dev/null; then
+    export GOBIN="$(go env GOPATH)/bin"
+    export GOPATH="$(go env GOPATH)"
+    export PATH=$PATH:$GOBIN
+fi
+
+if command -v zplug &> /dev/null; then
+    export ZPLUG_HOME="$HOME/.zplug"
+fi
+
+if command -v vim &> /dev/null; then
+    export EDITOR="$(which vim)"
+else
+    export EDITOR="$(which vi)"
+fi
 
 # Options (man zshoptions)
-setopt NO_CASE_GLOB
 setopt AUTO_CD
 setopt CORRECT
 setopt CORRECT_ALL
 setopt EXTENDED_HISTORY
+setopt NO_CASE_GLOB
 unsetopt BEEP
 
 # Aliases
@@ -33,11 +49,14 @@ alias trail='<<<${(F)path}'
 
 # Customised prompt
 if [ $HOST = "MacBook-Air.localdomain" ]; then
-    PROMPT="${BR}%(?..%F{red}[%?] %f)%2~ %# "
+    PROMPT="%(?..%F{red}[%?] %f)%2~ %# "
 else
     # Shows hostname in prompt when using remote machines
-    PROMPT="${BR}%(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %2~ %# "
+    PROMPT="%(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %2~ %# "
 fi
+
+# prepend new-line to prompt
+precmd() $funcstack[1]() echo
 
 # Git prompt integration
 autoload -Uz vcs_info
