@@ -5,11 +5,14 @@ export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
 export PATH=$PATH:/usr/sbin:/usr/local/go/bin
-export VISUAL="$EDITOR"
+export ZPLUG_HOME="$HOME/.zplug"
 
-if command -v cargo &> /dev/null; then
+if command -v rustup &> /dev/null; then
     export CARGO_HOME="$HOME/.cargo"
     export PATH=$PATH:$CARGO_HOME/bin
+    export RUSTUP_HOME="$HOME/.rustup"
+
+    source $CARGO_HOME/env
 fi
 
 if command -v go &> /dev/null; then
@@ -18,20 +21,13 @@ if command -v go &> /dev/null; then
     export PATH=$PATH:$GOBIN
 fi
 
-if command -v zplug &> /dev/null; then
-    export ZPLUG_HOME="$HOME/.zplug"
-fi
-
 if command -v vim &> /dev/null; then
     export EDITOR="$(which vim)"
 else
     export EDITOR="$(which vi)"
 fi
 
-if command -v cargo &> /dev/null; then
-    export CARGO_HOME="$HOME/.cargo"
-    source $CARGO_HOME/env
-fi
+export VISUAL="$EDITOR"
 
 # Options (man zshoptions)
 setopt AUTO_CD
