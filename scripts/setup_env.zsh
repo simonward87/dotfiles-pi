@@ -3,7 +3,7 @@
 echo -e "\n<<< Starting Environment Setup >>>\n"
 
 # programs to install with pacman
-programs=( htop ncdu neofetch tmux tree vim zsh )
+programs=( htop ncdu neofetch tldr tmux tree vim zsh )
 
 if grep -i "debian" /etc/issue &> /dev/null; then
     # update local repository
@@ -46,9 +46,16 @@ elif grep -i "arch" /etc/issue &> /dev/null; then
         fi
     done
 
+    # setup tldr cache dir
+    if [! -d "~/.local/share/tldr"]; then
+        mkdir -p ~/.local/share/tldr
+    fi
+
+    # update tldr cache
+    tldr -u
+
     # change default shell to Zsh
-    if [ "$SHELL" != "/usr/bin/zsh" ]
-    then
+    if [ "$SHELL" != "/usr/bin/zsh" ]; then
         echo -e "\nChanging default shell to zsh\n"
         chsh -s /usr/bin/zsh $USER
     else
