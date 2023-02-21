@@ -28,6 +28,11 @@ else
     export EDITOR="$(which vi)"
 fi
 
+if command -v cargo &> /dev/null; then
+    export CARGO_HOME="$HOME/.cargo"
+    source $CARGO_HOME/env
+fi
+
 # Options (man zshoptions)
 setopt AUTO_CD
 setopt CORRECT
@@ -46,6 +51,7 @@ alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
 alias ls='ls -1F --color --group-directories-first'
 alias trail='<<<${(F)path}'
+alias vi=vim
 
 # Customised prompt
 if [ $HOST = "MacBook-Air.localdomain" ]; then
@@ -82,7 +88,6 @@ function hgrep() {
 
 # # Plugins
 source $ZPLUG_HOME/init.zsh
-source $CARGO_HOME/env
 
 zplug 'le0me55i/zsh-extract'
 zplug 'plugins/git', from:oh-my-zsh
