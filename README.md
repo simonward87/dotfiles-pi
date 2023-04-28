@@ -149,9 +149,32 @@ createuser <username> -P --interactive " create a new role
 psql
 CREATE DATABASE <username>; " create new db matching username
 
-exit " quit out from the CLI, and then from the default user
+\q " quit out from the CLI, and then from the default user
 
 psql
 CREATE DATABASE example;
-\connect example; " connect to new db
+\c example; " connect to new db
+```
+
+#### Setup remote access
+
+```
+$ psql -c 'SHOW hba_file;'
+```
+
+1. Edit the hba file with superuser privileges
+1. At the end of the file, find IPv4 local connections
+1. Add an entry for the desired IP address, followed by `/32`
+1. Set the `METHOD` to `trust`:
+
+```
+# TYPE  DATABASE  USER  ADDRESS           METHOD
+host    all       all   192.168.1.999/32  trust
+```
+
+1. In the same directory as the hba file, edit `postgresql.conf`, and set `listen_addresses = '*'`
+1. Finally, restart the server:
+
+```
+$ sudo /etc/init.d/postgresql restart
 ```
