@@ -15,6 +15,7 @@
     ~/.config/neofetch: config/neofetch
     ~/.config/tmux: config/tmux
     ~/.gitconfig:
+    ~/.psqlrc:
     ~/.tmux.conf:
     ~/.vimrc:
     ~/.zshrc:
