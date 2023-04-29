@@ -162,18 +162,18 @@ CREATE DATABASE example;
 $ psql -c 'SHOW hba_file;'
 ```
 
-1. Edit the hba file with superuser privileges
-1. At the end of the file, find IPv4 local connections
-1. Add an entry for the desired IP address, followed by `/32`
-1. Set the `METHOD` to `trust`:
+- Edit the hba file with superuser privileges
+- At the end of the file, find IPv4 local connections
+- Add an entry for the desired IP address, followed by `/32`
+- Set the `METHOD` to `trust`:
 
 ```
 # TYPE  DATABASE  USER  ADDRESS           METHOD
 host    all       all   192.168.1.999/32  trust
 ```
 
-1. In the same directory as the hba file, edit `postgresql.conf`, and set `listen_addresses = '*'`
-1. Finally, restart the server:
+- In the same directory as the hba file, edit `postgresql.conf`, and set `listen_addresses = '*'`
+- Finally, restart the server:
 
 ```
 $ sudo /etc/init.d/postgresql restart
