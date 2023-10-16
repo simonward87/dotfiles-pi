@@ -13,6 +13,7 @@
       force: true
     ~/.config/htop: config/htop
     ~/.config/neofetch: config/neofetch
+    ~/.config/nvim: config/nvim
     ~/.config/tmux: config/tmux
     ~/.gitconfig:
     ~/.psqlrc:
@@ -22,5 +23,7 @@
 
 - shell:
     - command: ./scripts/setup_env.zsh
+    - command: ./scripts/setup_neovim.zsh
+    - command: ./scripts/setup_go.zsh
     # - command: ./scripts/setup_docker.zsh
     # - command: ./scripts/setup_gnome.zsh

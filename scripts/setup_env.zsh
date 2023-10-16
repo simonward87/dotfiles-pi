@@ -2,15 +2,15 @@
 
 echo -e "\n<<< Starting Environment Setup >>>\n"
 
-# programs to install with pacman
-programs=( htop ncdu neofetch tldr tmux tree vim zsh )
+# programs to install (includes neovim build prerequisites)
+programs=( cmake curl fd-find gettext htop ncdu neofetch neovim ninja-build nodejs npm ripgrep ruby tldr tmux tree unzip zsh )
 
 if grep -i "debian" /etc/issue &> /dev/null; then
     # update local repository
     sudo apt update
 
     # update all packages to latest versions
-    sudo apt full-upgrade
+    sudo apt full-upgrade -y
 
     for i in "${programs[@]}"
     do
@@ -67,9 +67,18 @@ else
 fi
 
 # install zplug
-if [ ! -d "$HOME/.zplug" ]
-then
+if [ ! -d "$HOME/.zplug" ]; then
     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 else
     echo "zplug exists, skipping install"
+fi
+
+if command -v fd &> /dev/null; then
+    echo "fd exists, skipping symlinking"
+else
+    if [ ! -d "$HOME/.local/bin" ]; then
+        mkdir $HOME/.local/bin
+    fi
+
+    ln -s $(which fdfind) ~/.local/bin/fd
 fi

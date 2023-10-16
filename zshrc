@@ -4,7 +4,7 @@ export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
-export PATH=$PATH:/usr/sbin:/usr/local/go/bin
+export PATH=$PATH:/usr/sbin:$HOME/.local/bin:/usr/local/go/bin
 export ZPLUG_HOME="$HOME/.zplug"
 
 if command -v rustup &> /dev/null; then
@@ -21,7 +21,9 @@ if command -v go &> /dev/null; then
     export PATH=$PATH:$GOBIN
 fi
 
-if command -v vim &> /dev/null; then
+if command -v nvim &> /dev/null; then
+    export EDITOR="$(which nvim)"
+elif command -v vim &> /dev/null; then
     export EDITOR="$(which vim)"
 else
     export EDITOR="$(which vi)"
@@ -47,7 +49,8 @@ alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
 alias ls='ls -1F --color --group-directories-first'
 alias trail='<<<${(F)path}'
-alias vi=vim
+alias vi=$EDITOR
+alias vim=$EDITOR
 
 # Customised prompt
 if [ $HOST = "MacBook-Air.localdomain" ]; then
@@ -105,6 +108,11 @@ zplug load
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit
 compinit -u
+
+# command completion bindings
+bindkey '^N' autosuggest-accept  # ctrl+n
+bindkey '^T' autosuggest-toggle  # ctrl+t
+bindkey '^Y' autosuggest-execute # ctrl+y
 
 # Case insensitive path-completion 
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 

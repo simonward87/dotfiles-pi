@@ -31,7 +31,7 @@ sudo apt update && sudo apt install -y git
 3. Clone this repository. Use `https` for now, switch to `ssh` later
 
 ```sh
-git clone https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
+git clone --recursive https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
 ```
 
 4. Confirm configuration details in `install.conf.yaml` and then run [`./install`](install)
