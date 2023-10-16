@@ -52,13 +52,16 @@ alias trail='<<<${(F)path}'
 alias vi=$EDITOR
 alias vim=$EDITOR
 
-# Customised prompt
-if [ $HOST = "MacBook-Air.localdomain" ]; then
-    PROMPT="%(?..%F{red}[%?] %f)%2~ %# "
-else
-    # Shows hostname in prompt when using remote machines
-    PROMPT="%(?.%F{245}%m%f.%F{red}[%?]%f %F{245}%m%f) %2~ %# "
-fi
+# dark mode
+export CLR_COMMENT="#91A2B0"
+export CLR_ERROR="#ff9aa0"
+
+# light mode
+# export CLR_COMMENT="#6B6A64"
+# export CLR_ERROR="#c1002f"
+
+# custom prompt
+PROMPT="%(?.%F{$CLR_COMMENT}%m%f.%F{$CLR_ERROR}[%?]%f %F{$CLR_COMMENT}%m%f) %2~ %# "
 
 # prepend new-line to prompt
 precmd() $funcstack[1]() echo
@@ -69,7 +72,7 @@ precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '%F{245}(%b) %r%f'
+zstyle ':vcs_info:git:*' formats "%F{$CLR_COMMENT} %b%f" # '%F{245}%r (%b)%f'
 zstyle ':vcs_info:*' enable git
 
 
