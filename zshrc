@@ -32,11 +32,15 @@ fi
 export VISUAL="$EDITOR"
 
 # Options (man zshoptions)
-setopt AUTO_CD
-setopt CORRECT
-setopt CORRECT_ALL
-setopt EXTENDED_HISTORY
-setopt NO_CASE_GLOB
+setopt AUTO_CD # auto cd when a command is a directory name
+setopt CD_SILENT # never print directory when cd -
+setopt CORRECT # try to correct command spelling
+setopt CORRECT_ALL # try to correct argument spelling
+setopt EXTENDED_HISTORY # save command timestamps
+setopt HIST_IGNORE_DUPS # don't add duplicate commands to history
+setopt HIST_EXPIRE_DUPS_FIRST # remove oldest duplicates first when trimming
+setopt HIST_NO_STORE # remove history command from list when invoked
+setopt NO_CASE_GLOB # case-insensitive glob
 unsetopt BEEP
 
 # Aliases
