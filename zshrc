@@ -4,7 +4,7 @@ export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
-export PATH=$PATH:/usr/sbin:$HOME/.local/bin:/usr/local/go/bin
+export PATH=$PATH:/usr/sbin:$HOME/.local/bin:/usr/local/go/bin:$HOME/bin
 export ZPLUG_HOME="$HOME/.zplug"
 
 if command -v rustup &> /dev/null; then
