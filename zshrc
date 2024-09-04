@@ -57,12 +57,12 @@ alias vi=$EDITOR
 alias vim=$EDITOR
 
 # dark mode
-export CLR_COMMENT="#91A2B0"
-export CLR_ERROR="#ff9aa0"
+# export CLR_COMMENT="#91A2B0"
+# export CLR_ERROR="#ff9aa0"
 
 # light mode
-# export CLR_COMMENT="#6B6A64"
-# export CLR_ERROR="#c1002f"
+export CLR_COMMENT="#6B6A64"
+export CLR_ERROR="#c1002f"
 
 # custom prompt
 PROMPT="%(?.%F{$CLR_COMMENT}%m%f.%F{$CLR_ERROR}[%?]%f %F{$CLR_COMMENT}%m%f) %2~ %# "
