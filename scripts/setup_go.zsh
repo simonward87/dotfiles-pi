@@ -5,7 +5,10 @@ echo -e "\n<<< Starting Go Setup >>>\n"
 if command -v go &> /dev/null; then
     echo "go exists, skipping install"
 else
-    sudo apt update && sudo apt install -y golang
+    curl -LO https://go.dev/dl/go1.23.0.linux-arm64.tar.gz
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf go1.23.0.linux-amd64.tar.gz
+    rm go1.23.0.linux-amd64.tar.gz
 
     if command -v dlv &> /dev/null; then
         echo "dlv exists, skipping install"
