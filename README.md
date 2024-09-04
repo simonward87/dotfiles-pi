@@ -9,23 +9,6 @@ There are some assumptions about the Pi being configured:
 - SSH has been initialised in Raspberry Pi Imager configuration
 - WiFi has been setup in Raspberry Pi Imager configuration
 
-### Local setup before connecting
-
-1. Install your local machine public key to the remote Pi:
-
-```sh
-$ ssh-copy-id -i ~/.ssh/id_ed25520 USER@HOST
-```
-
-2. Add an alias to `~/.ssh/config` (changing `USER` and `HOST` to username and IP address):
-
-```
-Host pi5
-    User USER
-    HostName HOST
-    TCPKeepAlive no
-```
-
 ### Raspberry Pi Setup
 
 1. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh):
@@ -71,10 +54,10 @@ $ sudo apt update && sudo apt install -y git
 8. Clone this repository:
 
 ```sh
-$ git clone --recurse-submodules --jobs=8 git@github.com:simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
+$ git clone --recurse-submodules --jobs=8 git@github.com:simonward87/dotfiles-pi.git ~/.dotfiles
 ```
 
-9. Confirm configuration details in `install.conf.yaml`, and finally, run [`./install`](install)
+9. Confirm configuration details in `~/.dotfiles/install.conf.yaml`, and finally, run `~/.dotfiles/install`
 
 #### WiFi SSH Dropouts
 
@@ -89,6 +72,17 @@ It can also be manually disabled using `$ sudo iw wlan0 set power_save off`, alt
 | Note: |
 | :--- |
 | `/usr/sbin` currently has to be manually added to `PATH` for `iw` to function, as it is not included by default |
+
+### Local setup
+
+For convenience, add an alias to `~/.ssh/config` (changing `USER` and `HOST` to username and IP address):
+
+```
+Host pi5
+    User USER
+    HostName HOST
+    TCPKeepAlive no
+```
 
 ### Docker Setup
 
@@ -179,6 +173,12 @@ Most of these steps can be handled more easily through the Raspberry Pi Imager c
 
 1. Initialise SSH by placing an empty file named `ssh` in the root directory
 2. [Setup WiFi](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/) by configuring `wpa_supplicant.conf` and placing in the root directory
+3. Once the pi is connected to your network, install your local machine public key to the remote Pi:
+
+```sh
+$ ssh-copy-id -i ~/.ssh/id_ed25520 USER@HOST
+```
+
 
 ## Learning About Dotfiles
 

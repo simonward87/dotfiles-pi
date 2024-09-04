@@ -12,7 +12,7 @@ else
 
     # download and build all dependencies and put the nvim
     # executable in build/bin
-    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
 
     # default install location is /usr/local
     sudo make install
