@@ -11,53 +11,35 @@ There are some assumptions about the Pi being configured:
 
 ### Raspberry Pi Setup
 
-1. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh):
+The script below automates the following operations:
+
+1. Generate SSH key
+1. Start SSH agent and add the new key to the agent
+1. Create an SSH configuration file with the correct permissions
+1. Add the new key to the configuration file for use with Github
 
 ```sh
-$ ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
-```
-
-2. Start `ssh-agent` and add the new key to the agent:
-
-```sh
-$ eval $(ssh-agent) && ssh-add ~/.ssh/id_ed25519
-```
-
-3. Create a configuration file in `~/.ssh` with `600` permissions:
-
-```sh
-$ touch ~/.ssh/config && chmod 600 ~/.ssh/config
-```
-
-4. Add the new key to the configuration file for use with Github:
-
-```
+ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
+eval $(ssh-agent) && ssh-add ~/.ssh/id_ed25519
+pushd ~/.ssh/
+touch config && chmod 600 config
+cat >> config<< EOF
 Host github.com
   User git
   IdentityFile ~/.ssh/id_ed25519
+EOF
+popd
 ```
 
-5. Copy the public key (`~/.ssh/id_ed25519.pub`) and add to Github > Settings > SSH and GPG keys
-6. Test SSH connection, then verify fingerprint and username:
+Now copy the public key (`~/.ssh/id_ed25519.pub`), add to Github > Settings > SSH and GPG keys, and then test the SSH connection (`$ ssh -T git@github.com`). If successful, run the script below to clone this repository and navigate into the newly created directory. 
 
 ```sh
-# https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
-$ ssh -T git@github.com
+sudo apt update && sudo apt install -y git
+git clone --recurse-submodules --jobs=8 git@github.com:simonward87/dotfiles-pi.git ~/.dotfiles
+cd ~/.dotfiles
 ```
 
-7. Update package info and install Git:
-
-```sh
-$ sudo apt update && sudo apt install -y git
-```
-
-8. Clone this repository:
-
-```sh
-$ git clone --recurse-submodules --jobs=8 git@github.com:simonward87/dotfiles-pi.git ~/.dotfiles
-```
-
-9. Confirm configuration details in `~/.dotfiles/install.conf.yaml`, and finally, run `~/.dotfiles/install`
+Confirm or adjust setup details in [`install.conf.yaml`](./install.conf.yaml), and finally, run `./install`.
 
 #### WiFi SSH Dropouts
 
@@ -75,12 +57,13 @@ It can also be manually disabled using `$ sudo iw wlan0 set power_save off`, alt
 
 ### Local setup
 
-For convenience, add an alias to `~/.ssh/config` (changing `USER` and `HOST` to username and IP address):
+For convenience, add an alias to `~/.ssh/config` (changing `NAME`, `USER` and `HOST` to device alias, username and IP address):
 
 ```
-Host pi5
+Host NAME
     User USER
     HostName HOST
+    ServerAliveInterval 5
     TCPKeepAlive no
 ```
 
