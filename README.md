@@ -1,40 +1,28 @@
 # Raspberry Pi Dotfiles
 
-I learned a ton about
-[dotfiles, command line use, Homebrew, zsh, git, macOS and more with the course **_Dotfiles from Start to Finish-ish_**](http://dotfiles.eieio.xyz/)
-by [@EIEIOxyz](https://twitter.com/EIEIOxyz/), and you can too!
-
 ## Restore Instructions
 
 There are some assumptions about the Pi being configured:
 
 - It is being setup in headless mode
 - It has already had an image installed
-- SSH has been initialised (placing an empty file named `ssh` in the root
-  directory)
-- WiFi has been setup (configuring `wpa_supplicant.conf` and placing in the root
-  directory)
+- SSH has been initialised (placing an empty file named `ssh` in the root directory, or enabling in Raspberry Pi Imager configuration). If initialised manually, copy local ssh id to the Pi (`ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST`), and consider adding an alias of the remote to `~/.ssh/config`
+- WiFi has been setup (configuring `wpa_supplicant.conf` and placing in the root directory, or enabling in Raspberry Pi Imager configuration)
 - You have successfully connected via SSH and are logged in
 
-1. Copy local ssh id to the Pi. Consider adding an alias of the remote to `~/.ssh/config` for fast access
-
-```sh
-ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST
-```
-
-2. Update package info and install Git
+1. Update package info and install Git
 
 ```sh
 sudo apt update && sudo apt install -y git
 ```
 
-3. Clone this repository. Use `https` for now, switch to `ssh` later
+2. Clone this repository. Use `https` for now, switch to `ssh` later
 
 ```sh
-git clone --recursive https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
+git clone --recurse-submodules --jobs=8 https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
 ```
 
-4. Confirm configuration details in `install.conf.yaml` and then run [`./install`](install)
+3. Confirm configuration details in `install.conf.yaml` and then run [`./install`](install)
 
 ### SSH Setup
 
@@ -178,3 +166,7 @@ host    all       all   192.168.1.999/32  trust
 ```
 $ sudo /etc/init.d/postgresql restart
 ```
+
+## Learning About Dotfiles
+
+I learned a ton about [dotfiles, command line use, Homebrew, zsh, git, macOS and more with the course **_Dotfiles from Start to Finish-ish_**](http://dotfiles.eieio.xyz/) by [@EIEIOxyz](https://twitter.com/EIEIOxyz/).
