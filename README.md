@@ -1,53 +1,52 @@
 # Raspberry Pi Dotfiles
 
-## Restore Instructions
+## Restore instructions
 
 There are some assumptions about the Pi being configured:
 
 - It is being setup in headless mode
 - It has already had an image installed
-- SSH has been initialised (placing an empty file named `ssh` in the root directory, or enabling in Raspberry Pi Imager configuration). If initialised manually, copy local ssh id to the Pi (`ssh-copy-id -i ~/.ssh/id_ed25519 USER@HOST`), and consider adding an alias of the remote to `~/.ssh/config`
-- WiFi has been setup (configuring `wpa_supplicant.conf` and placing in the root directory, or enabling in Raspberry Pi Imager configuration)
-- You have successfully connected via SSH and are logged in
+- SSH has been initialised in Raspberry Pi Imager configuration
+- WiFi has been setup in Raspberry Pi Imager configuration
 
-1. Update package info and install Git
+### Local setup before connecting
 
-```sh
-sudo apt update && sudo apt install -y git
-```
-
-2. Clone this repository. Use `https` for now, switch to `ssh` later
+1. Install your local machine public key to the remote Pi:
 
 ```sh
-git clone --recurse-submodules --jobs=8 https://github.com/simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
+$ ssh-copy-id -i ~/.ssh/id_ed25520 USER@HOST
 ```
 
-3. Confirm configuration details in `install.conf.yaml` and then run [`./install`](install)
+2. Add an alias to `~/.ssh/config` (changing `USER` and `HOST` to username and IP address):
 
-### SSH Setup
+```
+Host pi5
+    User USER
+    HostName HOST
+    TCPKeepAlive no
+```
 
-1. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh),
-   add to GitHub, and switch remotes.
+### Raspberry Pi Setup
+
+1. [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh):
 
 ```sh
-ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
+$ ssh-keygen -t ed25519 -C "39803787+simonward87@users.noreply.github.com"
 ```
 
-2. Start `ssh-agent`, and then add the new key to the agent
+2. Start `ssh-agent` and add the new key to the agent:
 
 ```sh
-eval $(ssh-agent)
-
-ssh-add ~/.ssh/id_ed25519
+$ eval $(ssh-agent) && ssh-add ~/.ssh/id_ed25519
 ```
 
-3. Create a config file in `~/.ssh` with `600` permissions
+3. Create a configuration file in `~/.ssh` with `600` permissions:
 
 ```sh
-touch ~/.ssh/config && chmod 600 ~/.ssh/config
+$ touch ~/.ssh/config && chmod 600 ~/.ssh/config
 ```
 
-4. Add the new key so it is used for Github
+4. Add the new key to the configuration file for use with Github:
 
 ```
 Host github.com
@@ -55,20 +54,41 @@ Host github.com
   IdentityFile ~/.ssh/id_ed25519
 ```
 
-5. Make a copy of the public key (`~/.ssh/id_ed25519.pub`) and add to Github >
-   Settings > SSH and GPG keys
-6. Test SSH connection, then verify fingerprint and username
+5. Copy the public key (`~/.ssh/id_ed25519.pub`) and add to Github > Settings > SSH and GPG keys
+6. Test SSH connection, then verify fingerprint and username:
 
 ```sh
 # https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
-ssh -T git@github.com
+$ ssh -T git@github.com
 ```
 
-7. Finally, navigate to `~/.dotfiles`, and set the remote to use SSH
+7. Update package info and install Git:
 
 ```sh
-git remote set-url origin git@github.com:simonward87/dotfiles-pi.git
+$ sudo apt update && sudo apt install -y git
 ```
+
+8. Clone this repository:
+
+```sh
+$ git clone --recurse-submodules --jobs=8 git@github.com:simonward87/dotfiles-pi.git ~/.dotfiles && cd ~/.dotfiles
+```
+
+9. Confirm configuration details in `install.conf.yaml`, and finally, run [`./install`](install)
+
+#### WiFi SSH Dropouts
+
+When connecting over SSH, the connection always drops after a period of time, necessitating a reboot. This can be stopped by turning off `power_save` in `/etc/rc.local`. Add the line below, before `exit 0` is called:
+
+```sh
+/sbin/iwconfig wlan0 power off
+```
+
+It can also be manually disabled using `$ sudo iw wlan0 set power_save off`, although this will not persist.
+
+| Note: |
+| :--- |
+| `/usr/sbin` currently has to be manually added to `PATH` for `iw` to function, as it is not included by default |
 
 ### Docker Setup
 
@@ -91,53 +111,39 @@ git remote set-url origin git@github.com:simonward87/dotfiles-pi.git
 2. Run the desktop and login to get started
 
 ```sh
-startx
+$ startx
 ```
 
 3. Optionally, set the desktop environment to load on boot — run `raspi-config`,
    and then update the **boot / auto-login** settings to boot to desktop
 
 ```sh
-sudo raspi-config
+$ sudo raspi-config
 ```
-
-### WiFi SSH Dropouts
-
-When connecting over SSH, the connection always drops after a period of time, necessitating a reboot. This can be fixed by turning off `power_save` in `/etc/rc.local`. Add the line below, before `exit 0` is called:
-
-```
-/sbin/iwconfig wlan0 power off
-```
-
-It can also be manually disabled using `sudo iw wlan0 set power_save off`, although this will not persist.
-
-| Note: |
-| :--- |
-| `/usr/sbin` currently has to be manually added to `PATH` for `iw` to function, as it is not included by default |
 
 ### Root User Config
 
 If desired, symlink local config (e.g. `.vimrc`) to the root user directory:
 
-```
-sudo ln -s ~/.dotfiles/vimrc /root/.vimrc
-sudo ln -s ~/.dotfiles/zshrc /root/.zshrc
-sudo rm /root/.bashrc && sudo ln -s ~/.dotfiles/bashrc /root/.bashrc
+```sh
+$ sudo ln -s ~/.dotfiles/vimrc /root/.vimrc
+$ sudo ln -s ~/.dotfiles/zshrc /root/.zshrc
+$ sudo rm /root/.bashrc && sudo ln -s ~/.dotfiles/bashrc /root/.bashrc
 ```
 
 ### Setup PostgreSQL
 
 ```sh
-sudo apt update && sudo apt full-upgrade -y
-sudo apt install postgresql
-sudo su postgres " Change to the postgres user 
+$ sudo apt update && sudo apt full-upgrade -y
+$ sudo apt install postgresql
+$ sudo su postgres # Change to the postgres user 
 
-createuser <username> -P --interactive " create a new role
+$ createuser <username> -P --interactive # create a new role
 
-psql
-CREATE DATABASE <username>; " create new db matching username
+$ psql
+[psql]=# CREATE DATABASE <username>; # create new db matching username
 
-\q " quit out from the CLI, and then from the default user
+[psql]=# \q # quit out from the CLI, and then from the default user
 
 psql
 CREATE DATABASE example;
@@ -166,6 +172,13 @@ host    all       all   192.168.1.999/32  trust
 ```
 $ sudo /etc/init.d/postgresql restart
 ```
+
+### Manual Pi Initialisation
+
+Most of these steps can be handled more easily through the Raspberry Pi Imager configuration – I've kept these notes here for reference.
+
+1. Initialise SSH by placing an empty file named `ssh` in the root directory
+2. [Setup WiFi](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/) by configuring `wpa_supplicant.conf` and placing in the root directory
 
 ## Learning About Dotfiles
 
