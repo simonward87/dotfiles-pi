@@ -168,21 +168,21 @@ nnoremap J mzJ`z
 " clear highlight search
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-let  theme = "tender"
+let  theme = "lunaperche"
 execute "colorscheme ".theme
 
+" custom syntax match
+syntax match WhitespaceEOL /\s\+$/
+
 " custom highlights
+highlight EndOfBuffer guifg=bg guibg=bg
+highlight LineNr guibg=bg
+
 if theme == "tender"
-  hi Normal guibg=#1d1d1d ctermbg=NONE
-  hi WhitespaceEOL guibg=#666666 ctermbg=gray
+  highlight Normal guibg=#1d1d1d ctermbg=NONE
+  highlight WhitespaceEOL guibg=#666666 ctermbg=gray
 elseif theme == "github"
   set background=light
-  hi Normal guibg=#ffffff ctermbg=white
-  hi WhitespaceEOL guibg=#d73a49 ctermbg=white
+  highlight Normal guibg=#ffffff ctermbg=white
+  highlight WhitespaceEOL guibg=#d73a49 ctermbg=white
 endif
-
-hi EndOfBuffer guifg=bg guibg=bg
-hi LineNr guibg=bg
-
-" custom syntax match
-match WhitespaceEOL /\s\+$/
