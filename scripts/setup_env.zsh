@@ -3,7 +3,7 @@
 echo -e "\n<<< Starting Environment Setup >>>\n"
 
 # programs to install (includes neovim build prerequisites)
-programs=( build-essential cmake curl fd-find gettext gzip htop ncdu neofetch ninja-build nodejs npm ripgrep ruby tar tldr tmux tree unzip zsh )
+programs=( build-essential cmake curl fd-find gettext gzip htop ncdu neofetch ninja-build nodejs npm ripgrep ruby tar tldr tmux tree unzip vim zsh )
 
 if grep -i "debian" /etc/issue &> /dev/null; then
     # update local repository
