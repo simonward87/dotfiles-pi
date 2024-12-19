@@ -24,6 +24,7 @@
 - shell:
     - command: ./scripts/setup_env.zsh
     - command: ./scripts/setup_go.zsh
-    # - command: ./scripts/setup_docker.zsh
+    - command: ./scripts/setup_node.zsh
+    - command: ./scripts/setup_docker.zsh
     # - command: ./scripts/setup_gnome.zsh
     # - command: ./scripts/setup_neovim.zsh

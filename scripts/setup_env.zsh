@@ -2,8 +2,8 @@
 
 echo -e "\n<<< Starting Environment Setup >>>\n"
 
-# programs to install (includes neovim build prerequisites)
-programs=( build-essential cmake curl fd-find gettext gzip htop ncdu neofetch ninja-build nodejs npm ripgrep ruby tar tldr tmux tree unzip vim zsh )
+# programs to install
+programs=( curl fd-find gzip htop ncdu neofetch ripgrep ruby tar tldr tmux tree unzip vim zsh )
 
 if grep -i "debian" /etc/issue &> /dev/null; then
     # update local repository
@@ -77,7 +77,7 @@ if command -v fd &> /dev/null; then
     echo "fd exists, skipping symlinking"
 else
     if [ ! -d "$HOME/.local/bin" ]; then
-        mkdir $HOME/.local/bin
+        mkdir -p $HOME/.local/bin
     fi
 
     ln -s $(which fdfind) ~/.local/bin/fd

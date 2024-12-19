@@ -44,6 +44,7 @@ setopt NO_CASE_GLOB # case-insensitive glob
 unsetopt BEEP
 
 # Aliases
+alias d=docker
 alias df='df -h'
 alias dtfs='cd $DOTFILES; vim .'
 alias egrep='egrep --color=auto'
