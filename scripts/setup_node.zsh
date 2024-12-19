@@ -6,7 +6,7 @@ if command -v node &> /dev/null; then
     echo "node exists, skipping install"
 else
     curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n \
-        | bash -s install lts
+        | sudo bash -s install lts
     # If you want n installed, you can use npm now.
     npm install -g n
 fi
