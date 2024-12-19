@@ -41,20 +41,6 @@ cd ~/.dotfiles
 
 Confirm or adjust setup details in [`install.conf.yaml`](./install.conf.yaml), and finally, run `./install`.
 
-#### WiFi SSH Dropouts
-
-When connecting over SSH, the connection always drops after a period of time, necessitating a reboot. This can be stopped by turning off `power_save` in `/etc/rc.local`. Add the line below, before `exit 0` is called:
-
-```sh
-/sbin/iwconfig wlan0 power off
-```
-
-It can also be manually disabled using `$ sudo iw wlan0 set power_save off`, although this will not persist.
-
-| Note: |
-| :--- |
-| `/usr/sbin` currently has to be manually added to `PATH` for `iw` to function, as it is not included by default |
-
 ### Local setup
 
 For convenience, add an alias to `~/.ssh/config` (changing `NAME`, `USER` and `HOST` to device alias, username and IP address):
