@@ -4,21 +4,21 @@ export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
 export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
 export HISTSIZE=10000
-export PATH=$PATH:/usr/sbin:$HOME/.local/bin:/usr/local/go/bin:$HOME/bin
+export PATH="$PATH:/usr/sbin:$HOME/.local/bin:$HOME/bin"
 export ZPLUG_HOME="$HOME/.zplug"
 
 if command -v rustup &> /dev/null; then
     export CARGO_HOME="$HOME/.cargo"
-    export PATH=$PATH:$CARGO_HOME/bin
+    export PATH="$PATH:$CARGO_HOME/bin"
     export RUSTUP_HOME="$HOME/.rustup"
 
-    source $CARGO_HOME/env
+    source "$CARGO_HOME/env"
 fi
 
 if command -v go &> /dev/null; then
     export GOBIN="$(go env GOPATH)/bin"
     export GOPATH="$(go env GOPATH)"
-    export PATH=$PATH:$GOBIN
+    export PATH="$PATH:$GOBIN"
 fi
 
 if command -v nvim &> /dev/null; then
@@ -46,7 +46,7 @@ unsetopt BEEP
 # Aliases
 alias d=docker
 alias df='df -h'
-alias dtfs='cd $DOTFILES; vim .'
+alias dtfs="cd $DOTFILES; vim ."
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
@@ -54,8 +54,7 @@ alias la='ls -AFho --color --group-directories-first'
 alias ll='ls -Fho --color --group-directories-first'
 alias ls='ls -1F --color --group-directories-first'
 alias trail='<<<${(F)path}'
-alias vi=$EDITOR
-alias vim=$EDITOR
+alias vi="$EDITOR"
 
 # dark mode
 # export CLR_COMMENT="#91A2B0"
