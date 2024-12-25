@@ -1,9 +1,7 @@
 filetype plugin indent on
-syntax enable
 
 set backspace=indent,eol,start                    " restore default backspace behaviour
 set completeopt=menuone,longest,noinsert,noselect " text completion
-set cursorline                                    " current line highlight
 set encoding=utf-8                                " set internal encoding
 set expandtab                                     " convert tabs to spaces
 set hlsearch                                      " highlight all search results
@@ -48,33 +46,30 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" Allow color schemes to do bright colors without forcing bold.
+" allow color schemes to do bright colors without forcing bold.
 if &t_Co == 8 && $TERM !~# '^Eterm'
   set t_Co=16
 endif
 
-" Auto-initialize Vim Plug if not already set up
+" auto-initialize Vim Plug if not already set up
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Run PlugInstall if there are missing plugins
+" run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
 call plug#begin('~/.vim/plugged')
 
-" Plugins
+" plugins
 Plug 'alvan/vim-closetag'                         " auto-close html, jsx, tsx tags
-Plug 'cormacrelf/vim-colors-github'               " theme
 Plug 'ctrlpvim/ctrlp.vim'                         " fuzzy finder
 Plug 'djoshea/vim-autoread'                       " auto reload files when changed externally
 Plug 'evanleck/vim-svelte', {'branch': 'main'}    " syntax highlighting & indentation, Svelte
-Plug 'gosukiwi/vim-atom-dark'                     " theme
-Plug 'jacoborus/tender.vim'                       " theme
 Plug 'leafgarland/typescript-vim'                 " ts syntax files
 Plug 'lilydjwg/colorizer'                         " hex code colourizer
 Plug 'pangloss/vim-javascript'                    " syntax highlighting & indentation, JavaScript
@@ -168,21 +163,20 @@ nnoremap J mzJ`z
 " clear highlight search
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-let  theme = "lunaperche"
-execute "colorscheme ".theme
+" let  theme = "lunaperche"
+" execute "colorscheme ".theme
 
-" custom syntax match
-syntax match WhitespaceEOL /\s\+$/
+syntax off
+highlight clear IncSearch
 
-" custom highlights
-highlight EndOfBuffer guifg=bg guibg=bg
-highlight LineNr guibg=bg
+" dark mode
+" highlight EndOfBuffer guifg=#111e29 guibg=#111e29
+" highlight IncSearch guifg=#111e29 guibg=#ffffff
+" highlight LineNr guifg=#91a2b0
+" highlight Search guifg=#111e29 guibg=#91a2b0
 
-if theme == "tender"
-  highlight Normal guibg=#1d1d1d ctermbg=NONE
-  highlight WhitespaceEOL guibg=#666666 ctermbg=gray
-elseif theme == "github"
-  set background=light
-  highlight Normal guibg=#ffffff ctermbg=white
-  highlight WhitespaceEOL guibg=#d73a49 ctermbg=white
-endif
+" light mode
+highlight EndOfBuffer guifg=#ffffff guibg=#ffffff
+highlight IncSearch guifg=#ffffff guibg=#000000
+highlight LineNr guifg=#6b6a64
+highlight Search guifg=#ffffff guibg=#6b6a64
