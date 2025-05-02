@@ -7,6 +7,10 @@ export HISTSIZE=10000
 export PATH="$PATH:/usr/sbin:$HOME/.local/bin:$HOME/bin"
 export ZPLUG_HOME="$HOME/.zplug"
 
+if [ ! -d "/usr/local/go" ]; then
+    export PATH="$PATH:/usr/local/go/bin"
+fi
+
 if command -v rustup &> /dev/null; then
     export CARGO_HOME="$HOME/.cargo"
     export PATH="$PATH:$CARGO_HOME/bin"

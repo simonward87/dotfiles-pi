@@ -15,4 +15,6 @@ else
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf $INSTALL_FILE
     rm $INSTALL_FILE
+
+    echo "go installed successfully. To use immediately, source .zshrc to update PATH"
 fi
