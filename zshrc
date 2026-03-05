@@ -1,11 +1,15 @@
 # Variables
-export DOTFILES="$HOME/.dotfiles"
+export DOTFILES=$HOME/.dotfiles
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=40960
-export HISTIGNORE=":pwd:id:uptime:resize:ls:clear:history"
+export HISTIGNORE=:pwd:id:uptime:resize:ls:clear:history
 export HISTSIZE=10000
-export PATH="$PATH:/usr/sbin:$HOME/.local/bin:$HOME/bin"
-export ZPLUG_HOME="$HOME/.zplug"
+export PATH=$PATH:/usr/sbin:$HOME/.local/bin:$HOME/bin
+export ZPLUG_HOME=$HOME/.zplug
+
+if [ -d /usr/local/go/bin ]; then
+    export PATH=/usr/local/go/bin:$PATH
+fi
 
 if [ -d "/usr/local/go" ]; then
     export PATH="$PATH:/usr/local/go/bin"
