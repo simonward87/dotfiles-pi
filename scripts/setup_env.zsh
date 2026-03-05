@@ -3,7 +3,7 @@
 echo -e "\n<<< Starting Environment Setup >>>\n"
 
 # programs to install
-programs=( curl fd-find gzip htop ncdu neofetch ripgrep ruby tar tldr tmux tree unzip vim zsh )
+programs=( curl fd-find gzip htop ncdu neofetch ripgrep ruby sqlite3 tar tldr tmux tree unzip vim zsh )
 
 if grep -i "debian" /etc/issue &> /dev/null; then
     # update local repository

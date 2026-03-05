@@ -17,6 +17,7 @@
     ~/.config/tmux: config/tmux
     ~/.gitconfig:
     ~/.psqlrc:
+    ~/.sqliterc:
     ~/.tmux.conf:
     ~/.vimrc:
     ~/.zshrc:
